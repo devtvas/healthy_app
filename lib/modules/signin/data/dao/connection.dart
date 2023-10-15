@@ -5,12 +5,12 @@ import 'package:sqflite/sqflite.dart';
 import 'script.dart';
 
 class Connection {
-  Database? _db;
-
+  Database? db;
+  Connection({this.db});
   Future<Database> get() async {
-    if (_db == null) {
+    if (db == null) {
       var path = join(await getDatabasesPath(), 'login.db');
-      _db = await openDatabase(
+      db = await openDatabase(
         path,
         version: 1,
         onCreate: (db, v) {
@@ -18,7 +18,6 @@ class Connection {
         },
       );
     }
-    return _db!;
+    return db!;
   }
-
 }

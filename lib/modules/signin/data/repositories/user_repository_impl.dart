@@ -5,9 +5,8 @@ import '../../domain/repositories/user_repository.dart';
 import '../dao/connection.dart';
 
 class UserRepositoryImpl implements UserRepository {
-  Database? database;
   Connection connection;
-  UserRepositoryImpl({required this.database, required this.connection});
+  UserRepositoryImpl({required this.connection});
 
   @override
   get(UserModel user) {
@@ -29,7 +28,9 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   save(UserModel user) async {
+    Database database;
+
     database = await connection.get();
-    await database!.insert('users', user.toMap());
+    await database.insert('users', user.toMap());
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'data/dao/connection.dart';
 import 'data/repositories/user_repository_impl.dart';
 import 'domain/repositories/user_repository.dart';
 import 'presentation/signin_controller.dart';
@@ -15,12 +16,12 @@ class SigninModule extends Module {
 
   @override
   void binds(Injector i) {
+    i.addSingleton<Connection>(() => Connection(db: i.get()));
     // CONTROLLERS
-    i.add<SigninController>(
-        () => SigninController( userRepository: i.get()));
+    i.add<SigninController>(() => SigninController(userRepository: i.get()));
 
     // REPOSITORIES
-    i.add<UserRepository>(() => UserRepositoryImpl(database: i.get(), connection: i.get(),));
+    i.add<UserRepository>(() => UserRepositoryImpl(connection: i.get()));
 
     // DATASOURCES
   }

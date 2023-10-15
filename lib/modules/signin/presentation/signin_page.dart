@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:healthy_app/modules/signin/signin_model.dart';
+import 'package:healthy_app/modules/signin/data/model/user_model.dart';
 
 import 'signin_controller.dart';
 
@@ -29,7 +29,8 @@ class _SigninPageState extends State<SigninPage> {
   }
 
   Future<void> _handleLogin() async {
-    final username = usernameController.text;
+    final username =
+        UserModel(id: 0, username: usernameController.text, password: '');
     final user = await signinController.getUser(username);
 
     if (user != null && user.password == passwordController.text) {
@@ -47,7 +48,7 @@ class _SigninPageState extends State<SigninPage> {
     final username = usernameController.text;
     final password = passwordController.text;
     if (username.isNotEmpty && password.isNotEmpty) {
-      final user = SigninModel(id: 0, username: username, password: password);
+      final user = UserModel(id: 0, username: username, password: password);
       await signinController.saveUser(user);
       // Redirecionar para a página de login ou realizar outra ação apropriada
       Modular.to.pop();

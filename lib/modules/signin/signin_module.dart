@@ -1,8 +1,9 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:healthy_app/core/database/local_storage/local_storage.dart';
-import 'package:healthy_app/modules/signin/signin_page.dart';
 
-import 'signin_controller.dart';
+import 'data/repositories/user_repository_impl.dart';
+import 'domain/repositories/user_repository.dart';
+import 'presentation/signin_controller.dart';
+import 'presentation/signin_page.dart';
 
 class SigninModule extends Module {
   @override
@@ -15,11 +16,11 @@ class SigninModule extends Module {
   @override
   void binds(Injector i) {
     // CONTROLLERS
-    i.addSingleton<SigninController>(
-        () => SigninController(localStorage: LocalStorage()));
+    i.add<SigninController>(
+        () => SigninController( userRepository: i.get()));
 
-    // // REPOSITORIES
-    // i.add<AuthRepository>(() => AuthRepositoryImpl(authDatasource: i.get()));
+    // REPOSITORIES
+    i.add<UserRepository>(() => UserRepositoryImpl(database: i.get(), connection: i.get(),));
 
     // DATASOURCES
   }

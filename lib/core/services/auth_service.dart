@@ -1,4 +1,4 @@
-import 'package:healthy_app/modules/signin/signin_model.dart';
+import 'package:healthy_app/modules/signin/data/model/user_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class AuthService {
@@ -6,7 +6,7 @@ class AuthService {
 
   AuthService(this.database);
 
-  Future<SigninModel?> authenticateUser(
+  Future<UserModel?> authenticateUser(
       String username, String password) async {
     final List<Map<String, dynamic>> maps = await database.query(
       'users',
@@ -15,7 +15,7 @@ class AuthService {
     );
 
     if (maps.isNotEmpty) {
-      final user = SigninModel.fromMap(maps.first);
+      final user = UserModel.fromMap(maps.first);
       if (user.password == password) {
         return user;
       }

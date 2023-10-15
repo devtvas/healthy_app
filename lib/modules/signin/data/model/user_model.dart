@@ -1,14 +1,14 @@
-import 'signin_entity.dart';
+import '../../domain/entity/user_entity.dart';
 
-class SigninModel extends SigninEntity {
-  SigninModel({
+class UserModel extends UserEntity {
+  UserModel({
     required super.id,
     required super.username,
     required super.password,
   });
 
-factory SigninModel.fromMap(Map<String, dynamic> map) {
-    return SigninModel(
+factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
       id: map['id'],
       username: map['username'],
       password: map['password'],

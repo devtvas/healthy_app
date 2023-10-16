@@ -1,23 +1,21 @@
 import 'dart:async';
+import 'package:healthy_app/modules/signin/data/dao/script.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-import 'script.dart';
-
 class Connection {
-  Database? db;
-  Connection({this.db});
+
   Future<Database> get() async {
-    if (db == null) {
-      var path = join(await getDatabasesPath(), 'login.db');
-      db = await openDatabase(
-        path,
-        version: 1,
-        onCreate: (db, v) {
-          db.execute(createTable);
-        },
-      );
-    }
-    return db!;
+   Database? database;
+    var path = join(await getDatabasesPath(), 'login.db');
+    database = await openDatabase(
+      path,
+      version: 1,
+      onCreate: (db, v) {
+        db.execute(createTable);
+      },
+    );
+      return database;
   }
+
 }

@@ -11,7 +11,7 @@ class SigninController {
     await userRepository.save(user);
   }
 
-  Future<UserModel?> getUser(UserModel username) async {
-    return userRepository.get(username);
+  Future<UserModel> getUser(UserModel username) async {
+    return await userRepository.get(username);
   }
 }

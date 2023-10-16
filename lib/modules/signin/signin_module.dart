@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:sqflite/sqflite.dart';
 
 import 'data/dao/connection.dart';
 import 'data/repositories/user_repository_impl.dart';
@@ -16,14 +17,17 @@ class SigninModule extends Module {
 
   @override
   void binds(Injector i) {
-    i.addSingleton<Connection>(() => Connection(db: i.get()));
+     i.addSingleton<Connection>(() => Connection());
+
     // CONTROLLERS
-    i.add<SigninController>(() => SigninController(userRepository: i.get()));
+    i.addSingleton<SigninController>(() => SigninController(userRepository: i.get()));
 
     // REPOSITORIES
-    i.add<UserRepository>(() => UserRepositoryImpl(connection: i.get()));
+    i.addSingleton<UserRepository>(() => UserRepositoryImpl(connection: i.get()));
 
     // DATASOURCES
+
+
   }
 
   @override

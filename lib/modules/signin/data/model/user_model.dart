@@ -17,7 +17,6 @@ factory UserModel.fromMap(Map<String, dynamic> map) {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'username': username,
       'password': password,
     };

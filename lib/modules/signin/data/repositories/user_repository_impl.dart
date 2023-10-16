@@ -9,9 +9,19 @@ class UserRepositoryImpl implements UserRepository {
   UserRepositoryImpl({required this.connection});
 
   @override
-  get(UserModel user) {
-    // TODO: implement get
-    throw UnimplementedError();
+  Future<UserModel> get(UserModel user) async {
+    Database? database;
+    database = (await connection.get());
+    final List<Map<String, dynamic>> maps = await database.query(
+      'users',
+      where: 'username = ?',
+      whereArgs: [user.username],
+    );
+
+    if (maps.isNotEmpty) {
+      return UserModel.fromMap(maps.first);
+    }
+    return user;
   }
 
   @override
@@ -30,7 +40,7 @@ class UserRepositoryImpl implements UserRepository {
   save(UserModel user) async {
     Database database;
 
-    database = await connection.get();
+    database = (await connection.get());
     await database.insert('users', user.toMap());
   }
 }

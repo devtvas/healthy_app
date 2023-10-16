@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:healthy_app/modules/home/home_module.dart';
 
+import 'modules/signin/data/dao/connection.dart';
 import 'modules/signin/signin_module.dart';
 
 class AppModule extends Module {
@@ -10,6 +11,10 @@ class AppModule extends Module {
         //   sharedPreferences: sharedPreferences,
         // ),
       ];
+
+@override
+  void binds(Injector i) {
+  }
 
   @override
   void routes(r) {

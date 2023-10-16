@@ -24,102 +24,107 @@ class _SigninPageState extends State<SigninPage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              // Insira seu logotipo aqui (substitua "logo.png" pelo seu caminho de imagem)
-              Image.asset('assets/logo.png', width: 120, height: 120),
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: <Widget>[
+                const SizedBox(height: 50),
+                // Insira seu logotipo aqui (substitua "logo.png" pelo seu caminho de imagem)
+                Image.asset('assets/logo.png', width: 220, height: 220),
 
-              const SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-              // Campo de usuário
-              TextFormField(
-                controller: usernameController,
-                decoration: InputDecoration(
-                  labelText: 'Login',
-                  labelStyle: const TextStyle(color: AppColors.txtGreenLight),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: AppColors.txtBlueDark),
-                    borderRadius: BorderRadius.circular(30),
+                // Campo de usuário
+                TextFormField(
+                  controller: usernameController,
+                  decoration: InputDecoration(
+                    labelText: 'Login',
+                    labelStyle: const TextStyle(color: AppColors.txtGreenLight),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: AppColors.txtBlueDark),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: AppColors.txtGreenLight),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(color: AppColors.txtGreenLight),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
+                  validator: (value) => validateUsername(value),
                 ),
-                validator: (value) => validateUsername(value),
-              ),
 
-              const SizedBox(height: 10),
+                const SizedBox(height: 10),
 
-              // Campo de senha
-              TextFormField(
-                controller: passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Senha',
-                  labelStyle: const TextStyle(color: AppColors.txtGreenLight),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: AppColors.txtBlueDark),
-                    borderRadius: BorderRadius.circular(30),
+                // Campo de senha
+                TextFormField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: 'Senha',
+                    labelStyle: const TextStyle(color: AppColors.txtGreenLight),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: AppColors.txtBlueDark),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: AppColors.txtGreenLight),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(color: AppColors.txtGreenLight),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
+                  validator: (value) => validatePassword(value),
                 ),
-                validator: (value) => validatePassword(value),
-              ),
 
-              const SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-              // Botão de entrada
+                // Botão de entrada
 
-              Row(
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: _handleLogin,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                        child: Container(
-                          width: width,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: AppColors.btnBlueDark, // Cor de fundo
-                          ),
-                          child: const Center(
-                            child: Text(
-                              'Entrar',
-                              style: TextStyle(
-                                color: Colors.white, // Cor do texto
-                                fontSize: 16,
+                Row(
+                  children: [
+                    Expanded(
+                      child: InkWell(
+                        onTap: _handleLogin,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 4.0),
+                          child: Container(
+                            width: width,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: AppColors.btnBlueDark, // Cor de fundo
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'Entrar',
+                                style: TextStyle(
+                                  color: Colors.white, // Cor do texto
+                                  fontSize: 16,
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30),
-              const Text(
-                '© 2023 HealthyCann',
-                style: TextStyle(color: AppColors.txtGrayLight),
-              )
-            ],
+                  ],
+                ),
+                const SizedBox(height: 30),
+                const Text(
+                  '© 2023 HealthyCann',
+                  style: TextStyle(color: AppColors.txtGrayLight),
+                )
+              ],
+            ),
           ),
         ),
       ),
